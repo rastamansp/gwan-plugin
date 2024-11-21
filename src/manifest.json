@@ -1,0 +1,15 @@
+{
+  "manifest_version": 3,
+  "name": "Text Menu Extension",
+  "version": "1.0",
+  "description": "Adiciona um menu interativo em caixas de texto.",
+  "permissions": [],
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ]
+}

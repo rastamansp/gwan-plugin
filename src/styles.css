@@ -1,0 +1,32 @@
+/* Estilo do menu */
+.custom-text-menu {
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    z-index: 1000;
+  }
+  
+  /* Estilo dos itens do menu */
+  .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+  }
+  
+  .menu-item:hover {
+    background-color: #f0f0f0;
+  }
+  
+  /* Estilo dos ícones */
+  .menu-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+  }
+  

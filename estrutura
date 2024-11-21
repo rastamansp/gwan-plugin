@@ -1,0 +1,9 @@
+text-menu-extension/
+├── manifest.json
+├── content.js
+├── styles.css
+└── icons/
+    ├── icon.png
+    ├── melhorar.png
+    ├── corrigir.png
+    └── traduzir.png
