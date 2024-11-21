@@ -14,17 +14,37 @@ function createMenu(textbox) {
     {
       label: "Melhorar escrita",
       icon: "icons/melhorar.png",
-      action: () => alert("Melhorar escrita"),
+      action: () => logAction("Melhorar escrita", textbox.value),
     },
     {
       label: "Corrigir ortografia e gramática",
       icon: "icons/corrigir.png",
-      action: () => alert("Corrigir ortografia e gramática"),
+      action: () => logAction("Corrigir ortografia e gramática", textbox.value),
     },
     {
       label: "Traduzir para...",
       icon: "icons/traduzir.png",
-      action: () => alert("Traduzir para..."),
+      action: () => logAction("Traduzir para...", textbox.value),
+    },
+    {
+      label: "Encurtar",
+      icon: "icons/encurtar.png",
+      action: () => logAction("Encurtar", textbox.value),
+    },
+    {
+      label: "Alongar",
+      icon: "icons/alongar.png",
+      action: () => logAction("Alongar", textbox.value),
+    },
+    {
+      label: "Simplificar Linguagem",
+      icon: "icons/simplificar.png",
+      action: () => logAction("Simplificar Linguagem", textbox.value),
+    },
+    {
+      label: "Mudar Tom",
+      icon: "icons/mudar-tom.png",
+      action: () => logAction("Mudar Tom", textbox.value),
     },
   ];
 
@@ -43,6 +63,7 @@ function createMenu(textbox) {
 
   // Calcula a posição do menu em relação ao campo de texto
   const rect = textbox.getBoundingClientRect();
+  menuContainer.style.position = "absolute";
   menuContainer.style.top = `${rect.bottom + window.scrollY}px`;
   menuContainer.style.left = `${rect.left + window.scrollX}px`;
 
@@ -56,9 +77,20 @@ function createMenu(textbox) {
   document.addEventListener("click", removeMenu);
 }
 
-// Adiciona evento a todas as caixas de texto
-const textboxes = document.querySelectorAll('textarea, input[type="text"]');
+// Função para registrar as ações no histórico
+function logAction(action, text) {
+  const logMessage = `Botão selecionado: ${action}\nTexto atual: ${text}`;
+  alert(logMessage); // Exibe o log no alert
+  console.log(logMessage); // Registra no console
 
-textboxes.forEach((textbox) => {
+  // Atualiza o histórico no HTML
+  const historyDiv = document.getElementById("history");
+  const newEntry = document.createElement("p");
+  newEntry.textContent = logMessage;
+  historyDiv.appendChild(newEntry);
+}
+
+// Adiciona evento a todas as caixas de texto
+document.querySelectorAll("textarea, input[type='text']").forEach((textbox) => {
   textbox.addEventListener("focus", () => createMenu(textbox));
 });

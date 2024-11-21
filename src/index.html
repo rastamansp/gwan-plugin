@@ -25,7 +25,7 @@
       ></textarea>
     </form>
 
-    <h2>Histórico de Chamadas à API</h2>
+    <h2>Histórico de Interações</h2>
     <div
       id="history"
       style="
@@ -35,71 +35,22 @@
         overflow-y: auto;
       "
     >
-      <p>Nenhuma chamada realizada ainda.</p>
+      <p>Nenhuma interação realizada ainda.</p>
     </div>
 
     <script>
-      // Função para realizar chamadas ao backend
-      async function callApi(method, type, text) {
-        const url = "http://localhost:3000/api";
-        const body = {
-          metodo: method,
-          tipo: type,
-          historico: getHistory(),
-          texto: text,
-        };
+      // Função para registrar as ações e exibir alert
+      function logAction(action, text) {
+        const logMessage = `Botão selecionado: ${action}\nTexto atual: ${text}`;
+        alert(logMessage); // Exibe o log no alert
+        console.log(logMessage); // Registra no console
 
-        try {
-          const response = await fetch(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(body),
-          });
-
-          const result = await response.json();
-          updateHistory(
-            `Enviado: ${JSON.stringify(body)}, Resposta: ${JSON.stringify(
-              result
-            )}`
-          );
-        } catch (error) {
-          updateHistory(`Erro ao chamar API: ${error.message}`);
-        }
-      }
-
-      // Função para atualizar o histórico no front-end
-      function updateHistory(entry) {
+        // Atualiza o histórico na página
         const historyDiv = document.getElementById("history");
         const newEntry = document.createElement("p");
-        newEntry.textContent = entry;
+        newEntry.textContent = logMessage;
         historyDiv.appendChild(newEntry);
       }
-
-      // Função para obter o histórico atual
-      function getHistory() {
-        const historyDiv = document.getElementById("history");
-        const entries = Array.from(historyDiv.querySelectorAll("p")).map(
-          (entry) => entry.textContent
-        );
-        return entries.slice(1); // Remove a mensagem inicial de "Nenhuma chamada"
-      }
-
-      // Exemplo de chamada do backend ao focar em um campo de texto
-      document
-        .querySelectorAll("input[type='text'], textarea")
-        .forEach((textbox) => {
-          textbox.addEventListener("focus", () => {
-            const text = textbox.value;
-            callApi("focus", "interaction", text);
-          });
-
-          textbox.addEventListener("input", () => {
-            const text = textbox.value;
-            callApi("input", "typing", text);
-          });
-        });
     </script>
   </body>
 </html>
